@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('list', 'api\TransactionController@list');
+Route::post('transaction/{id}', 'api\TransactionController@transaction');
