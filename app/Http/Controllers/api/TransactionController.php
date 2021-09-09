@@ -1,18 +1,22 @@
 <?php
 declare(strict_types=1);
 namespace App\Http\Controllers\API;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Transaction;
-use App\Http\Resources\TransactionResource;
+use App\Interfaces\TransactionInterface;
 
-class TransactionController 
-{
+final class TransactionController 
+{   
+    protected $transaction = null;
+    
+    public function __construct(TransactionInterface $transaction)
+    {   
+        $this->transaction = $transaction;
+    }
+
     public function list()
     {
         try 
-        {
-            return TransactionResource::collection(Transaction::paginate(25));
+        {   
+            return $transactions = $this->transaction->getAllTransactions();
         }
         catch (Exception $ex) 
         {
@@ -24,8 +28,7 @@ class TransactionController
     {
         try 
         {
-            return new TransactionResource(Transaction::findOrFail($id));
-
+           return $transactions = $this->transaction->getTransactionsById($id); 
         }
         catch (Exception $ex) 
         {

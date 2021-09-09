@@ -1,10 +1,8 @@
 <?php
 declare(strict_types=1);
-
 namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
-use Hash;
 class Transaction extends Model
 {
 	use Notifiable;
@@ -87,5 +85,4 @@ class Transaction extends Model
 	{  
 		return	$datetime = date('Y/m/d , H:m:i a', intval($time));
 	}
-
 }
